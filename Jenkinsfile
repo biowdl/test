@@ -20,9 +20,11 @@ pipeline {
                 sh 'java -version'
                 checkout scm
                 sh 'git submodule update --init --recursive'
+                env.outputDir = "./test-output"
+                sh "mkdir -p ${outputDir}"
                 script {
                     def sbtHome = tool 'sbt 1.0.4'
-                    env.sbt= "${sbtHome}/bin/sbt -Dbiowdl.output_dir=./test-output -no-colors -batch"
+                    env.sbt= "${sbtHome}/bin/sbt -Dbiowdl.output_dir=${outputDir} -no-colors -batch"
                 }
             }
         }

@@ -10,10 +10,10 @@ pipeline {
     tools {
         jdk 'JDK 8u162'
     }
-    environment {
+//    environment {
 //        CROMWELL_JAR     = credentials('cromwell-jar')
 //        CROMWELL_CONFIG = credentials('cromwell-config')
-    }
+//    }
     stages {
         stage('Init') {
             steps {

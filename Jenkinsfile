@@ -26,6 +26,8 @@ pipeline {
                     env.sbt= "${sbtHome}/bin/sbt -Dbiowdl.output_dir=${outputDir} -Dcromwell.jar=${CROMWELL_JAR} -Dcromwell.config=${CROMWELL_CONFIG} -no-colors -batch"
                 }
                 sh "mkdir -p ${outputDir}"
+                sh "rm -rf ${outputDir}"
+                sh "mkdir -p ${outputDir}"
             }
         }
 

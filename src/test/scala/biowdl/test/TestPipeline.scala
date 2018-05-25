@@ -21,6 +21,10 @@
 
 package biowdl.test
 
+import java.io.File
+
 import nl.biopet.utils.biowdl.Pipeline
 
-trait TestPipeline extends Pipeline {}
+trait TestPipeline extends Pipeline {
+  def startFile: File = new File("./test.wdl")
+}

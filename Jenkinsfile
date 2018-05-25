@@ -20,7 +20,7 @@ pipeline {
                 sh 'java -version'
                 checkout scm
                 sh 'git submodule update --init --recursive'
-                env.outputDir = "./test-output"
+                env.outputDir= "./test-output"
                 sh "mkdir -p ${outputDir}"
                 script {
                     def sbtHome = tool 'sbt 1.0.4'

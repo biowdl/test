@@ -21,4 +21,8 @@
 
 package biowdl.test
 
-class TestPipelineTest extends TestPipeline {}
+import java.io.File
+
+class TestPipelineTest extends TestPipeline {
+  testMustHaveFile(new File(outputDir, "echo.out"))
+}

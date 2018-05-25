@@ -10,6 +10,10 @@ pipeline {
     tools {
         jdk 'JDK 8u162'
     }
+    environment {
+//        CROMWELL_JAR     = credentials('cromwell-jar')
+//        CROMWELL_CONFIG = credentials('cromwell-config')
+    }
     stages {
         stage('Init') {
             steps {
@@ -18,7 +22,7 @@ pipeline {
                 sh 'git submodule update --init --recursive'
                 script {
                     def sbtHome = tool 'sbt 1.0.4'
-                    env.sbt= "${sbtHome}/bin/sbt -no-colors -batch"
+                    env.sbt= "${sbtHome}/bin/sbt -Dbiowdl.output_dir=./test-output -no-colors -batch"
                 }
             }
         }
@@ -28,10 +32,9 @@ pipeline {
                 sh "#!/bin/bash\n" +
                         "set -e -v -o pipefail\n" +
                         "${sbt} clean evicted biopetTest 'set test in assembly := {}' assembly | tee sbt.log"
+                junit '**/test-output/junitreports/*.xml'
                 sh 'n=`grep -ce "\\* com.github.biopet" sbt.log || true`; if [ "$n" -ne \"0\" ]; then echo "ERROR: Found conflicting dependencies inside biopet"; exit 1; fi'
                 sh "git diff --exit-code || (echo \"ERROR: Git changes detected, please regenerate the readme, create license headers and run scalafmt: sbt biopetGenerateReadme headerCreate scalafmt\" && exit 1)"
-                step([$class: 'ScoveragePublisher', reportDir: 'target/scala-2.11/scoverage-report/', reportFile: 'scoverage.xml'])
-                junit '**/test-output/junitreports/*.xml'
             }
         }
     }

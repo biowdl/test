@@ -21,10 +21,8 @@
 
 package biowdl.test
 
-import java.io.File
-
 import nl.biopet.utils.biowdl.PipelineSuccess
 
 trait TestPipelineSuccess extends TestPipeline with PipelineSuccess {
-  testMustHaveFile(new File(outputDir, "echo.out"))
+  addMustHaveFile("echo.out")
 }

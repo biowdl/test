@@ -10,10 +10,10 @@ pipeline {
     tools {
         jdk 'JDK 8u162'
     }
-//    environment {
-//        CROMWELL_JAR     = credentials('cromwell-jar')
-//        CROMWELL_CONFIG = credentials('cromwell-config')
-//    }
+    environment {
+        CROMWELL_JAR    = credentials('cromwell-jar')
+        CROMWELL_CONFIG = credentials('cromwell-config')
+    }
     stages {
         stage('Init') {
             steps {
@@ -23,7 +23,7 @@ pipeline {
                 script {
                     def sbtHome = tool 'sbt 1.0.4'
                     env.outputDir= "./test-output"
-                    env.sbt= "${sbtHome}/bin/sbt -Dbiowdl.output_dir=${outputDir} -no-colors -batch"
+                    env.sbt= "${sbtHome}/bin/sbt -Dbiowdl.output_dir=${outputDir} -Dcromwell.jar=${CROMWELL_JAR} -Dcromwell.config=${CROMWELL_CONFIG} -no-colors -batch"
                 }
                 sh "mkdir -p ${outputDir}"
             }

@@ -26,7 +26,12 @@ import java.io.File
 import nl.biopet.utils.biowdl.Pipeline
 
 trait TestPipeline extends Pipeline {
-  override def inputs: Map[String, String] = super.inputs ++ Map("test.echo.text" -> "Hello world!")
+  override def inputs: Map[String, String] =
+    super.inputs ++
+      Map(
+        "test.echo.text" -> "Hello world!",
+        "test.echo.outputDir" -> outputDir.getAbsolutePath
+      )
 
   def startFile: File = new File("./test.wdl")
 }

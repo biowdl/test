@@ -4,7 +4,12 @@ workflow test {
 
 task echo {
     String text
+    String outputDir
     command {
-        echo ${text}
+        echo ${text} > ${outputDir}/echo.out
+    }
+
+    output {
+        File out = "${outputDir}/echo.out"
     }
 }

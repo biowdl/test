@@ -54,6 +54,6 @@ workflow sample {
     # results below this line.
 
     output {
-        Array[String] libraries = librariesConfigs.keys
+
     }
 }

@@ -47,6 +47,6 @@ workflow pipeline {
     # below this line.
 
     output {
-        Array[String] samples = samplesConfigs.keys
+
     }
 }

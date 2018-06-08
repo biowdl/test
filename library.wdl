@@ -56,6 +56,6 @@ workflow library {
     # all the readgroups below this line.
 
     output {
-        Array[String] readgroups = readgroupConfigs.keys
+
     }
 }

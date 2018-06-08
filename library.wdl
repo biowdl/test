@@ -39,7 +39,7 @@ workflow library {
 
     # The jobs that are done per readgroup.
     # Modify readgroup.wdl to change what is happening per readgroup
-    scatter (readgroupId in readgroupConfigs.keys) {
+    scatter (readgroupId in read_lines(readgroupConfigs.keysFile)) {
         if (readgroupId != "") {
             call readgroup.readgroup as readgroup {
                 input:

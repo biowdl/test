@@ -34,7 +34,7 @@ workflow pipeline {
 
     # Do the jobs that should be executed per sample.
     # Modify sample.wdl to change what is happening per sample
-    scatter (sampleId in samplesConfigs.keys) {
+    scatter (sampleId in read_lines(samplesConfigs.keysFile)) {
         call sampleWorkflow.sample as sample {
             input:
                 sampleConfigs = sampleConfigFiles,

@@ -38,7 +38,7 @@ workflow sample {
 
     # Do the work per library.
     # Modify library.wdl to change what is happening per library.
-    scatter (libraryId in librariesConfigs.keys) {
+    scatter (libraryId in read_lines(librariesConfigs.keysFile)) {
         if (libraryId != "") {
             call libraryWorkflow.library as library {
                 input:

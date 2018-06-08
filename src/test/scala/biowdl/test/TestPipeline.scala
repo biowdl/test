@@ -23,15 +23,15 @@ package biowdl.test
 
 import java.io.File
 
-import nl.biopet.utils.biowdl.Pipeline
+import nl.biopet.utils.biowdl.multisample.MultisamplePipeline
+import nl.biopet.utils.biowdl.samples.{Wgs1PairedEnd, Wgs2PairedEnd}
 
-trait TestPipeline extends Pipeline {
-  override def inputs: Map[String, String] =
+trait TestPipeline extends MultisamplePipeline with Wgs1PairedEnd with Wgs2PairedEnd {
+  override def inputs: Map[String, Any] =
     super.inputs ++
       Map(
-        "test.echo.text" -> "Hello world!",
-        "test.echo.outputDir" -> outputDir.getAbsolutePath
+        "test.outputDir" -> outputDir.getAbsolutePath
       )
 
-  def startFile: File = new File("./test.wdl")
+  def startFile: File = new File("./pipeline.wdl")
 }

@@ -32,7 +32,8 @@ workflow sample {
             inputFiles = sampleConfigs,
             sample = sampleId,
             jsonOutputPath = sampleId + ".config.json",
-            tsvOutputPath = sampleId + ".config.tsv"
+            tsvOutputPath = sampleId + ".config.tsv",
+            keyFilePath = "config.keys.tsv"
     }
 
     # Do the work per library.

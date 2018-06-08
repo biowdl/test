@@ -33,7 +33,8 @@ workflow readgroup {
             sample = sampleId,
             library = libraryId,
             readgroup = readgroupId,
-            tsvOutputPath = readgroupId + ".config.tsv"
+            tsvOutputPath = readgroupId + ".config.tsv",
+            keyFilePath = "config.keys.tsv"
     }
 
     output {

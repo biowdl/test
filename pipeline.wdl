@@ -28,7 +28,8 @@ workflow pipeline {
     #  Reading the samples from the sample config files
     call biopet.SampleConfig as samplesConfigs {
         input:
-            inputFiles = sampleConfigFiles
+            inputFiles = sampleConfigFiles,
+            keyFilePath = "config.keys.tsv"
     }
 
     # Do the jobs that should be executed per sample.

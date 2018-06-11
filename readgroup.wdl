@@ -37,9 +37,13 @@ workflow readgroup {
             keyFilePath = "config.keys.tsv"
     }
 
+    Object configValues = if (defined(config.tsvOutput) && size(config.tsvOutput) > 0)
+        then read_map(config.tsvOutput)
+        else { "": "" }
+
     output {
-        File inputR1 = config.values.R1
-        File inputR2 = config.values.R2
+        File inputR1 = configValues.R1
+        File inputR2 = configValues.R2
     }
 
 }

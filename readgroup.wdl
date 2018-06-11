@@ -41,9 +41,30 @@ workflow readgroup {
         then read_map(config.tsvOutput)
         else { "": "" }
 
+    call echo {
+        input:
+            outputPath = outputDir + "/${sample}-${library}-${readgroup}.txt",
+            message = "${sample}-${library}-${readgroup}"
+    }
+
     output {
         File inputR1 = configValues.R1
         File inputR2 = configValues.R2
     }
 
+}
+
+task echo {
+    String outputPath
+    String message
+
+    command {
+        set -e -o pipefail
+        mkdir -p . ${"$(dirname " + outputPath + ")"}
+        echo ${message} > ${outputPath}
+    }
+
+    output {
+        File outputFile = outputPath
+    }
 }

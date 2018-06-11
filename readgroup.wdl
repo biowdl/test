@@ -43,8 +43,8 @@ workflow readgroup {
 
     call echo {
         input:
-            outputPath = outputDir + "/${sample}-${library}-${readgroup}.txt",
-            message = "${sample}-${library}-${readgroup}"
+            outputPath = outputDir + "/${sampleId}-${libraryId}-${readgroupId}.txt",
+            message = "${sampleId}-${libraryId}-${readgroupId}"
     }
 
     output {

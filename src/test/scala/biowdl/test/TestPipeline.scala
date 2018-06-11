@@ -30,7 +30,7 @@ trait TestPipeline extends MultisamplePipeline with Wgs1PairedEnd with Wgs2Paire
   override def inputs: Map[String, Any] =
     super.inputs ++
       Map(
-        "test.outputDir" -> outputDir.getAbsolutePath
+        s"$startPipelineName.outputDir" -> outputDir.getAbsolutePath
       )
 
   def startFile: File = new File("./pipeline.wdl")

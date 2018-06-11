@@ -52,10 +52,31 @@ workflow library {
         }
     }
 
+    call echo {
+        input:
+            outputPath = outputDir + "/${sampleId}-${libraryId}.txt",
+            message = "${sampleId}-${libraryId}}"
+    }
+
     # Add the jobs that are done per library and over the results of
     # all the readgroups below this line.
 
     output {
 
+    }
+}
+
+task echo {
+    String outputPath
+    String message
+
+    command {
+        set -e -o pipefail
+        mkdir -p . ${"$(dirname " + outputPath + ")"}
+        echo ${message} > ${outputPath}
+    }
+
+    output {
+        File outputFile = outputPath
     }
 }

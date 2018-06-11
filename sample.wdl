@@ -50,10 +50,31 @@ workflow sample {
         }
     }
 
+    call echo {
+        input:
+            outputPath = outputDir + "/${sampleId}.txt",
+            message = "${sampleId}"
+    }
+
     # Do the per sample work and the work over all the library
     # results below this line.
 
     output {
 
+    }
+}
+
+task echo {
+    String outputPath
+    String message
+
+    command {
+        set -e -o pipefail
+        mkdir -p . ${"$(dirname " + outputPath + ")"}
+        echo ${message} > ${outputPath}
+    }
+
+    output {
+        File outputFile = outputPath
     }
 }

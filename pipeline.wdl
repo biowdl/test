@@ -43,10 +43,31 @@ workflow pipeline {
         }
     }
 
+    call echo {
+        input:
+            outputPath = outputDir + "/echo.out",
+            message = "Hello"
+    }
+
     # Put the jobs that need to be done over the result of all samples
     # below this line.
 
     output {
 
+    }
+}
+
+task echo {
+    String outputPath
+    String message
+
+    command {
+        set -e -o pipefail
+        mkdir -p . ${"$(dirname " + outputPath + ")"}
+        echo ${message} > ${outputPath}
+    }
+
+    output {
+        File outputFile = outputPath
     }
 }

@@ -39,7 +39,7 @@ workflow pipeline {
             input:
                 sampleConfigs = sampleConfigFiles,
                 sampleId = sampleId,
-                outputDir = outputDir + "/sample_" + sampleId
+                outputDir = outputDir + "/samples/" + sampleId
         }
     }
 
